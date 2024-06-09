@@ -30,7 +30,9 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('/images/Logo.png') }}"/>
 </head>
+<body>
     <div class="container-xxl bg-white p-0">
 
         <div class="container-xxl position-relative p-0">
@@ -186,4 +188,5 @@
     
     <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
+</body>
 </html>

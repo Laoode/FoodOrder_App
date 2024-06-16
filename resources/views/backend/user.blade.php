@@ -5,54 +5,39 @@
     <div class="card card-custom card-stretch gutter-b">
         <!--begin::Header-->
         <div class="card-header border-0 py-5 text-center flex-column">
-            <span class="font-weight-bolder text-dark">Daftar Menu Ayam Geprek Borobudur</span>
-            <span class="text-muted mt-3 font-weight-bold font-size-sm">Rincian Menu Terkini</span>
+            <span class="font-weight-bolder text-dark">Daftar Pelanggan Ayam Geprek Borobudur</span>
+            <span class="text-muted mt-3 font-weight-bold font-size-sm">Rincian Pelanggan Terkini</span>
         </div>
         <!--end::Header-->
         <!--begin::Body-->
         <div class="card-body pt-0 pb-3">
-            <div class="pb-2">
-                <button type="button" class="btn btn-light-primary" data-toggle="modal" data-target="#exampleModal">
-                    <i class="bi bi-plus-square"></i>
-                  </button>
-            </div>
             <div class="tab-content">
                 <!--begin::Table-->
                 <div class="table-responsive">
                     <table class="table table-head-custom table-head-bg table-bordered table-vertical-center">
                         <thead class="text-center">
                             <tr class="text-uppercase">
-                                <th style="min-width: 250px" class="pl-7">
-                                    <span class="text-dark-75">Gambar</span>
-                                </th>
-                                <th>Nama Menu</th>
-                                <th>Kategori</th>
-                                <th>Harga</th>
-                                <th>Deskripsi</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Password</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            @forelse ($menu as $item)
+                            @forelse ($users as $item)
                             <tr>
                                 <td>
-                                    <img src="{{ asset('storage/'.$item->image) }}" alt="image" width="150px">
+                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $item->name }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $item->title }}</span>
+                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $item->email }}</span>
                                 </td>
                                 <td>
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $item->category }}</span>
-                                </td>
-                                <td>
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Rp. {{ $item->price }}</span>
-                                </td>
-                                <td>
-                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $item->description }}</span>
+                                    <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $item->password }}</span>
                                 </td>
                                 <td class="pr-0 text-center">
-                                    <a href="{{ route('menu.edit', Crypt::encrypt($item->id)) }}" class="btn btn-light-success font-weight-bolder font-size-sm"><i class="bi bi-pencil-square"></i></a>
-                                <form action="{{ route('menu.destroy', Crypt::encrypt($item->id)) }}" method="post">
+                                    <a href="{{ route('user.edit', Crypt::encrypt($item->id)) }}" class="btn btn-light-success font-weight-bolder font-size-sm"><i class="bi bi-pencil-square"></i></a>
+                                <form action="{{ route('user.destroy', Crypt::encrypt($item->id)) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                     <button type="submit" class="btn btn-light-danger font-weight-bolder font-size-sm"><i class="bi bi-trash-fill"></i></button>
@@ -66,7 +51,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{ $menu->links() }}
+                    {{-- {{ $menu->links() }} --}}
                 </div>
                 <!--end::Table-->
             </div>

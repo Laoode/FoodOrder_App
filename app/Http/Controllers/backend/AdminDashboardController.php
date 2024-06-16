@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Menu;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class AdminDashboardController extends Controller
 {
@@ -12,7 +16,8 @@ class AdminDashboardController extends Controller
      */
     public function index()
     {
-        return view('backend.index');
+        $menu = Menu::latest()->paginate(10);
+        return view('backend.index', compact('menu'));
     }
 
     /**
@@ -61,5 +66,39 @@ class AdminDashboardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function userMenu()
+    {
+        $users = User::latest()->paginate(10);
+        return view('backend.user', compact('users'));
+    }
+
+    public function userEdit($id)
+    {
+        $userId = Crypt::decrypt($id);
+        $user = User::find($userId);
+        return view('backend.user.edit', compact('user'));
+    }
+
+    public function userUpdate(UpdateUserRequest $request, $id)
+    {
+        $user = User::find($id);
+
+        $validated = $request->validated();
+        $user->update([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+        ]);
+
+        return redirect('/UserMenu')->with('success', 'User Berhasil di Update');
+    }
+
+    public function userDestroy($id)
+    {
+        $userId = Crypt::decrypt($id);
+        $user = User::find($userId);
+        $user->delete();
+        return redirect('/UserMenu')->with('success', 'User Berhasil Dihapus');
     }
 }

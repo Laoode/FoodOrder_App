@@ -18,7 +18,7 @@ class verifikasi
     {
         $status = Auth::check();
         if (!$status) {
-            return redirect('/login');
+            return redirect('/register');
         }
         return $next($request);
     }

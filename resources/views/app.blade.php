@@ -11,6 +11,9 @@
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
+    {{-- Toastr --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +34,9 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('/images/Logo.png') }}"/>
+
+    {{-- Sweet Alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container-xxl bg-white p-0">
@@ -64,6 +70,10 @@
                                 </li>
                             @endif
                         @else
+                        <li class="nav-item row justify-content-center rounded-circle" style="height: 3rem">
+                            <a class="nav-link" href="{{ route('cart.index') }}">Keranjang <i class="fa-solid fa-cart-shopping"></i></a>
+                        </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -153,5 +163,28 @@
     
     <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+    @if (session('success'))
+        toastr.success("{{ session('success') }}");
+    @endif
+
+    @if (session('error'))
+        toastr.error("{{ session('error') }}");
+    @endif
+    </script>
+
+    <script>
+        const myModal = document.getElementById('myModal')
+        const myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+        })
+    </script>
+
 </body>
 </html>

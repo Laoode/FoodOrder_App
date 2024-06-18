@@ -4,7 +4,9 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class DashboardController extends Controller
@@ -93,8 +95,10 @@ class DashboardController extends Controller
         return view('frontend.detail', compact('detail'));
     }
 
-    public function comment()
+    public function history()
     {
-        return view('frontend.comment');
+        $id = Auth::user()->id;
+        $order = Order::withTrashed()->where('user_id', $id)->paginate(10);
+        return view('frontend.history', compact('order'));
     }
 }

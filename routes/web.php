@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\backend\AdminDashboardController;
 use App\Http\Controllers\backend\MenuController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\frontend\DashboardController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\CekStatus;
 use App\Http\Middleware\verifikasi;
@@ -24,7 +27,18 @@ Route::get('/dashboard', function () {
 Route::get('/about', [DashboardController::class, 'about'])->name('about.index');
 Route::get('/menu', [DashboardController::class, 'menu'])->name('menu.index');
 Route::get('/detail/{id}', [DashboardController::class, 'detail'])->name('detail');
-Route::get('/comment', [DashboardController::class, 'comment'])->middleware(verifikasi::class)->name('comment');
+Route::get('/history', [DashboardController::class, 'history'])->name('history');
+
+Route::get('/cart', [OrderController::class, 'index'])->middleware(verifikasi::class)->name('cart.index');
+Route::post('/cart', [OrderController::class, 'store'])->middleware(verifikasi::class)->name('cart.store');
+Route::get('/cart/{id}', [OrderController::class, 'destroy'])->middleware(verifikasi::class)->name('cart.destroy');
+
+Route::get('/payment/{id}', [PaymentController::class, 'showPayment'])->middleware(verifikasi::class)->name('payment.show');
+Route::post('/payment', [PaymentController::class, 'processPayment'])->middleware(verifikasi::class)->name('processPayment');
+Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->middleware(verifikasi::class)->name('payment.success');
+
+Route::get('/comment/{id}', [CommentController::class, 'index'])->middleware(verifikasi::class)->name('comment');
+Route::post('/comment', [CommentController::class, 'store'])->middleware(verifikasi::class)->name('comment.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

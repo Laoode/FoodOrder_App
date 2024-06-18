@@ -16,4 +16,14 @@ class Menu extends Model
         'description',
         'image'
     ];
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

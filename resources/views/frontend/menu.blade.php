@@ -11,6 +11,15 @@
 @section('content')
             <!-- Menu Start -->
             {{-- Food --}}
+            <div class="container">
+                <form class="d-flex" role="search" method="POST" action="{{ route('search') }}">
+                @csrf
+                  <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search" name="search">
+                  <button class="btn btn-outline-danger rounded-pill" type="submit">Search</button>
+                </form>
+            </div>
+            <hr>
+
             <div class="container-xxl py-5">
                 <div class="container">
                     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">

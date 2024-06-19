@@ -28,6 +28,7 @@ Route::get('/about', [DashboardController::class, 'about'])->name('about.index')
 Route::get('/menu', [DashboardController::class, 'menu'])->name('menu.index');
 Route::get('/detail/{id}', [DashboardController::class, 'detail'])->name('detail');
 Route::get('/history', [DashboardController::class, 'history'])->name('history');
+Route::post('/search', [DashboardController::class, 'search'])->name('search');
 
 Route::get('/cart', [OrderController::class, 'index'])->middleware(verifikasi::class)->name('cart.index');
 Route::post('/cart', [OrderController::class, 'store'])->middleware(verifikasi::class)->name('cart.store');

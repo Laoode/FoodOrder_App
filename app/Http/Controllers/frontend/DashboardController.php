@@ -101,4 +101,13 @@ class DashboardController extends Controller
         $order = Order::withTrashed()->where('user_id', $id)->paginate(10);
         return view('frontend.history', compact('order'));
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $food = Menu::where('title', 'LIKE', "%{$search}%")->where('category', 'food')->paginate(10);
+        $drink = Menu::where('title', 'LIKE', "%{$search}%")->where('category', 'drink')->paginate(10);
+        $menu = 'active';
+        return view('frontend.menu', compact('menu','food','drink'));
+    }  
 }

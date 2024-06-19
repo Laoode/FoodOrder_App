@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row g-4 justify-content-center">
         @forelse ($order as $item)
-        <div class="card p-2">
+        <div class="card p-2 rounded-3">
             <div class="col-lg-6">
                 <div class="d-flex align-items-center">
                     <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('storage/'.$item->menu->image) }}" alt="" style="width: 80px;">
@@ -27,11 +27,11 @@
             </div>
             @if ($item->status == 'dibatalkan')
             <div class="text-end">
-                <a href="" class="btn btn-danger">{{ $item->status }}</a>
+                <a href="" class="btn btn-danger rounded-pill">{{ $item->status }}</a>
             </div>
             @else
             <div class="text-end">
-                <a href="" class="btn btn-success">{{ $item->status }}</a>
+                <a href="" class="btn btn-success rounded-pill">{{ $item->status }}</a>
             </div> 
             @endif
         </div>

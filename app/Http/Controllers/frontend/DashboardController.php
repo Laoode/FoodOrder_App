@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Menu;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class DashboardController extends Controller
 {
@@ -12,7 +16,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('frontend.index');
+        $food = Menu::where('category', 'food')->paginate(10);
+        $drink = Menu::where('category', 'drink')->paginate(10);
+        return view('frontend.index', compact('food', 'drink'));
     }
 
     /**
@@ -61,5 +67,38 @@ class DashboardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function login()
+    {
+        return view('auth.login');
+    }
+
+    public function about()
+    {
+        $about = 'active';
+        return view('frontend.about', compact('about'));
+    }
+
+    public function menu()
+    {
+        $food = Menu::where('category', 'food')->paginate(10);
+        $drink = Menu::where('category', 'drink')->paginate(10);
+        $menu = 'active';
+        return view('frontend.menu', compact('menu','food','drink'));
+    }
+
+    public function detail($id)
+    {
+        $detailId = Crypt::decrypt($id);
+        $detail = Menu::find($detailId);
+        return view('frontend.detail', compact('detail'));
+    }
+
+    public function history()
+    {
+        $id = Auth::user()->id;
+        $order = Order::withTrashed()->where('user_id', $id)->paginate(10);
+        return view('frontend.history', compact('order'));
     }
 }

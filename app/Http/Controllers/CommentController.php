@@ -38,7 +38,8 @@ class CommentController extends Controller
         Comment::create([
             'message' => $validated['message'],
             'user_id' => $request['user_id'],
-            'menu_id' => $request['menu_id']
+            'menu_id' => $request['menu_id'],
+            'rating' => $request['rating']
         ]);
 
         return redirect()->back()->with('success', 'Ulasan Berhasil di Tambahkan');

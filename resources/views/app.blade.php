@@ -70,6 +70,10 @@
                                 </li>
                             @endif
                         @else
+                        <li class="nav-item row justify-content-center rounded-circle" style="height: 3rem; margin-right:7px">
+                            <a class="nav-link" href="{{ route('order.status') }}">Pesanan <i class="fa-solid fa-basket-shopping"></i></a>
+                        </li>
+
                         <li class="nav-item row justify-content-center rounded-circle" style="height: 3rem">
                             <a class="nav-link" href="{{ route('cart.index') }}">Keranjang <i class="fa-solid fa-cart-shopping"></i></a>
                         </li>

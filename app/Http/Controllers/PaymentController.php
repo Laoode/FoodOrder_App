@@ -62,6 +62,7 @@ class PaymentController extends Controller
                 $order->update([
                     'status' => 'via cash'
                 ]);
+                $order->delete();
                 return view('frontend.payment.success');
             } else {
                 // Handle QRIS and bank transfer
@@ -69,6 +70,7 @@ class PaymentController extends Controller
                 $order->update([
                     'status' => 'via transfer'
                 ]);
+                $order->delete();
                 return view('frontend.payment.process', compact('snapToken', 'request'));
             }
         } catch (\Exception $e) {

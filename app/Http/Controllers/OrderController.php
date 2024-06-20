@@ -47,7 +47,8 @@ class OrderController extends Controller
             'menu_id' => $request->menu_id,
         ]);
 
-        return redirect('/cart')->with('success', 'Pesanan Berhasil di Tambahkan!');
+        session()->flash('success', 'Pesanan Berhasil di Tambahkan!');
+        return redirect('/cart');
     }
 
     /**
@@ -85,6 +86,7 @@ class OrderController extends Controller
             'status' => 'dibatalkan'
         ]);
         $cart->delete();
-        return redirect('/cart')->with('success', 'Pesanan Berhasil di Hapus!');
+        session()->flash('success', 'Pesanan Berhasil di Hapus!');
+        return redirect('/cart');
     }
 }

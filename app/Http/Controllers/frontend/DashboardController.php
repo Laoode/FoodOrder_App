@@ -109,5 +109,12 @@ class DashboardController extends Controller
         $drink = Menu::where('title', 'LIKE', "%{$search}%")->where('category', 'drink')->paginate(10);
         $menu = 'active';
         return view('frontend.menu', compact('menu','food','drink'));
-    }  
+    }
+    
+    public function order()
+    {
+        $id = Auth::user()->id;
+        $order = Order::where('user_id', $id)->paginate(10);
+        return view('frontend.order', compact('order'));
+    }
 }

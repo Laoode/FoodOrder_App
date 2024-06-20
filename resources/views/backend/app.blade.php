@@ -160,6 +160,15 @@
 													<span class="menu-text">Pelanggan</span>
 												</a>
 											</li>
+
+											<li class="menu-item" aria-haspopup="true">
+												<a href="{{ route('order.index') }}" class="menu-link">
+													<i class="menu-bullet menu-bullet-line">
+														<span></span>
+													</i>
+													<span class="menu-text">Pesanan</span>
+												</a>
+											</li>
 										</ul>
 									</div>
 								</li>

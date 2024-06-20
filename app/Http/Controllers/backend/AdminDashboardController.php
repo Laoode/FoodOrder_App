@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderStatusStoreRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Menu;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -100,5 +102,25 @@ class AdminDashboardController extends Controller
         $user = User::find($userId);
         $user->delete();
         return redirect('/UserMenu')->with('success', 'User Berhasil Dihapus');
+    }
+
+    public function userOrder()
+    {
+        $order = Order::latest()->paginate(10);
+        return view('backend.order', compact('order'));
+    }
+
+    public function orderStatus(OrderStatusStoreRequest $request, $id)
+    {
+        $idOrder = Crypt::decrypt($id);
+        $order = Order::find($idOrder);
+
+        $validated = $request->validated();
+
+        $order->update([
+            'order_status' => $validated['order_status']
+    ]);
+
+        return redirect('/UserOrder')->with('success', 'Status Pesanan Berhasil di Ubah!');
     }
 }

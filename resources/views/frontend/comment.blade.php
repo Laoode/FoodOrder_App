@@ -55,12 +55,4 @@
   </div>
 </div>
 
-<script>
-  Swal.fire({
-      title: 'Success!',
-      text: '{{ session('success') }}',
-      icon: 'success',
-      confirmButtonText: 'OK'
-  });
-</script>
 @endsection

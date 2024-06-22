@@ -22,7 +22,7 @@
         @method('POST')
         <div class="form-group pb-2">
             <label for="amount">Total (IDR)</label>
-            <input type="number" name="amount" id="amount" class="form-control" min="{{ $order->total_price }}" required>
+            <input type="number" name="amount" id="amount" class="form-control" min="{{ $order->total_price }}" value="{{ $order->total_price }}">
         </div>
         <div class="form-group pb-2">
             <label for="payment_method">Metode Pembayaran</label>
